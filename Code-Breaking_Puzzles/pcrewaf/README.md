@@ -60,11 +60,11 @@ function is_php($data){
 }
 ```
 
-该正则对于文本"\<?php echo 1;?>/*padding"的匹配过程如下：
+该正则对于文本"\<?php echo 1;/*padding"的匹配过程如下：
 
 * "<\\?"匹配"<?"
 
-* ".*"匹配"php echo 1;>/\*padding"
+* ".*"匹配"php echo 1;/\*padding"
 
 * "[(`;?>]"匹配失败，吐出结尾的一个字符"g"，回溯次数加一
 
@@ -72,9 +72,9 @@ function is_php($data){
 
 * ...
 
-* 直到把"/*padding"全部吐出，"[(`;?>]"匹配到"?>"
+* 直到把"/*padding"全部吐出，"[(`;?>]"匹配到";"
 
-* 最后".*"匹配"padding"，完成匹配
+* 最后".*"匹配"/*padding"，完成匹配
 
 
 也就是说在这种情况下回溯次数等于结尾填充的字符串长度，当字符串长度超过pcre.backtrack_limit也就是1000000时，函数产生错误PREG_BACKTRACK_LIMIT_ERROR，返回FALSE，也就绕过了安全检查。
