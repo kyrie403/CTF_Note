@@ -55,7 +55,7 @@ if(preg_match('/^[a-z0-9_]*$/isD', $action)) {
    ![image](flag.png)
 
 
-   ### 三.背后的原理
+### 三.背后的原理
 #### 1.为什么"\create_function"等价于"create_function" —— php命名空间中有三种名称：
 
 * 非限定名称 —— $person = new Human();若当前命名空间为current，则Human被解析为current\Human
